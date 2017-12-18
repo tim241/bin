@@ -1,0 +1,19 @@
+#!/bin/sh
+if [ "x$1" = "x" ]; then
+	echo Error: hash required
+	exit 1
+fi
+if `which hashcat > /dev/null 2>&1`; then
+	echo "Trying to crack: $1"
+	echo "$1" > /tmp/tmp.hash
+	start=`date +%s`
+	hashcat -m 1000 /tmp/tmp.hash -a 3 > /tmp/hashcat.log
+	end=`date +%s`
+	if [ "$?" = "0" ]; then
+		echo Cracking took $((end-start)) seconds
+		echo "Hash cracked: `hashcat -m 1000 /tmp/tmp.hash -a 3 --show | tr ":" "\n" | sed '1d'`"
+		rm /tmp/tmp.hash
+	fi
+else
+	echo Hashcat not found!
+fi
