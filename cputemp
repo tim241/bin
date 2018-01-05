@@ -1,0 +1,2 @@
+#!/bin/sh
+sensors | grep -A 0 'CPUTIN' | cut -c25-32
