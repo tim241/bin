@@ -1,0 +1,3 @@
+#!/bin/sh
+# Open urxvt instead of gnome-terminal inside nautilus
+urxvt -e sh -c "cd `echo $@ | cut -d' ' -f5` && bash"
