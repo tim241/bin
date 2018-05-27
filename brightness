@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+for display in $(xrandr -q | grep " connected" | cut -d' ' -f1)
+do
+    echo "Changing brightness for $display"
+    xrandr --output $display --brightness $1
+done
